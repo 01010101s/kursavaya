@@ -29,8 +29,8 @@ public class MainController {
 
 
     private String connectionType;
-    private Socket socket;
-    private ServerSocket serverSocket;
+    private static Socket socket;
+    private static ServerSocket serverSocket;
     private Thread gameThread; // для управления потоком игры
     //private static final Image rockImage = new Image(Objects.requireNonNull(MainController.class.getResource("/org/example/rockpaperscissors/rock.png")).toString());
     //private static final Image paperImage = new Image(Objects.requireNonNull(MainController.class.getResource("/org/example/rockpaperscissors/paper.png")).toString());
@@ -251,4 +251,19 @@ public class MainController {
         alert.setContentText("Нажмите 'Ок' для продолжения");
         alert.showAndWait();
     }
+
+    public static void closeGame() {
+        try {
+            if (socket != null) {
+                socket.close();
+            }
+            if (serverSocket != null) {
+                serverSocket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Platform.exit();  // Безопасное завершение работы
+    }
+
 }

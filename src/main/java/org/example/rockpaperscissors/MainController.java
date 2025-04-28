@@ -44,7 +44,7 @@ public class MainController {
         //scissorsImageView.setImage(scissorsImage);
         // Подстраховка, если список не добавлен в FXML
         if (choiceBox.getItems().isEmpty()) {
-            choiceBox.getItems().addAll("Камень", "Ножницы", "Бумага");
+            choiceBox.getItems().addAll("Камень", "Бумага", "Ножницы");
         }
 
         // Проверка на null для choiceBox

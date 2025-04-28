@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Reflection?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -66,14 +67,20 @@
       <font>
          <Font name="System Bold" size="25.0" />
       </font></Label>
-   <Button fx:id="hostBtn" layoutX="76.0" layoutY="308.0" onAction="#startHosting" text="Создать сервер" textFill="#00b9dd">
+   <Button fx:id="hostBtn" layoutX="76.0" layoutY="308.0" onAction="#startHosting" text="Создать сервер" textFill="#2200db">
       <font>
          <Font name="System Bold" size="13.0" />
-      </font></Button>
-   <Button fx:id="connectBtn" layoutX="403.0" layoutY="306.0" onAction="#connectToServer" text="Подключиться" textFill="#00cd22">
+      </font>
+      <effect>
+         <Reflection fraction="0.67" topOpacity="0.15" />
+      </effect></Button>
+   <Button fx:id="connectBtn" layoutX="403.0" layoutY="306.0" onAction="#connectToServer" text="Подключиться" textFill="#c600cc">
       <font>
          <Font name="System Bold" size="14.0" />
-      </font></Button>
+      </font>
+      <effect>
+         <Reflection fraction="0.7" topOpacity="0.16" />
+      </effect></Button>
    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ff2f" height="101.0" layoutX="201.0" layoutY="260.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="194.0" />
    <Button fx:id="playBtn" layoutX="217.0" layoutY="281.0" onAction="#handlePlay" prefHeight="80.0" prefWidth="166.0" text="ИГРАТЬ">
       <font>
@@ -94,7 +101,10 @@
                </Stop>
             </stops>
          </RadialGradient>
-      </textFill></Button>
+      </textFill>
+      <effect>
+         <DropShadow height="70.83" radius="40.775" width="94.27" />
+      </effect></Button>
    <Rectangle arcHeight="5.0" arcWidth="5.0" height="147.0" layoutX="84.0" layoutY="105.0" opacity="0.07" stroke="BLACK" strokeType="INSIDE" width="120.0" />
    <ImageView fx:id="rockImageView" fitHeight="139.0" fitWidth="137.0" layoutX="75.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
       <image>

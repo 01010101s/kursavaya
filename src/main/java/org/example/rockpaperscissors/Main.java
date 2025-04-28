@@ -20,6 +20,7 @@ public class Main extends Application {
         Parent root = loader.load();
         stage.setTitle("Камень, ножницы, бумага");
         stage.setScene(new Scene(root));
+        stage.setResizable(false);
         stage.show();
 
         stage.setOnCloseRequest(event -> {

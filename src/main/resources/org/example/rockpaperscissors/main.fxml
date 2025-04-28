@@ -11,7 +11,7 @@
 
 <AnchorPane prefHeight="374.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.rockpaperscissors.MainController">
    <ComboBox fx:id="choiceBox" layoutX="243.0" layoutY="65.0" prefHeight="27.0" prefWidth="111.0" />
-   <Label fx:id="resultLabel" layoutX="261.0" layoutY="31.0" prefHeight="25.0" prefWidth="84.0" text="Ваш ход:">
+   <Label fx:id="resultLabel" layoutX="256.0" layoutY="30.0" prefHeight="28.0" prefWidth="94.0" text="Ваш ход:">
       <font>
          <Font name="System Bold" size="19.0" />
       </font></Label>

@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="374.0" prefWidth="603.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="org.example.rockpaperscissors.MainController">
+<AnchorPane prefHeight="374.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.rockpaperscissors.MainController">
    <ComboBox fx:id="choiceBox" layoutX="261.0" layoutY="72.0" prefHeight="27.0" prefWidth="84.0" />
    <Label fx:id="resultLabel" layoutX="261.0" layoutY="31.0" prefHeight="25.0" prefWidth="84.0" text="Ваш ход:">
       <font>
@@ -29,17 +29,17 @@
          <Font name="System Bold" size="26.0" />
       </font></Button>
    <Rectangle arcHeight="5.0" arcWidth="5.0" height="147.0" layoutX="84.0" layoutY="105.0" opacity="0.07" stroke="BLACK" strokeType="INSIDE" width="120.0" />
-   <ImageView fitHeight="139.0" fitWidth="137.0" layoutX="75.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="rockImageView" fitHeight="139.0" fitWidth="137.0" layoutX="75.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
          <Image url="@rock.png" />
       </image>
    </ImageView>
-   <ImageView fitHeight="126.0" fitWidth="120.0" layoutX="238.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="paperImageView" fitHeight="126.0" fitWidth="120.0" layoutX="238.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
          <Image url="@paper.png" />
       </image>
    </ImageView>
-   <ImageView fitHeight="126.0" fitWidth="120.0" layoutX="399.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fx:id="scissorsImageView" fitHeight="126.0" fitWidth="120.0" layoutX="399.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true" visible="false">
       <image>
          <Image url="@scissors.png" />
       </image>

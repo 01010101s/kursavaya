@@ -3,9 +3,12 @@ package org.example.rockpaperscissors;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.io.*;
 import java.net.*;
+import java.util.Objects;
 
 public class MainController {
 
@@ -20,14 +23,25 @@ public class MainController {
 
     @FXML
     private Button connectBtn;
+    @FXML
+    private ImageView rockImageView, paperImageView, scissorsImageView;
+
+
 
     private String connectionType;
     private Socket socket;
     private ServerSocket serverSocket;
     private Thread gameThread; // для управления потоком игры
+    //private static final Image rockImage = new Image(Objects.requireNonNull(MainController.class.getResource("/org/example/rockpaperscissors/rock.png")).toString());
+    //private static final Image paperImage = new Image(Objects.requireNonNull(MainController.class.getResource("/org/example/rockpaperscissors/paper.png")).toString());
+    //private static final Image scissorsImage = new Image(Objects.requireNonNull(MainController.class.getResource("/org/example/rockpaperscissors/scissors.png")).toString());
+
 
     @FXML
     private void initialize() {
+        //rockImageView.setImage(rockImage);
+        //paperImageView.setImage(paperImage);
+        //scissorsImageView.setImage(scissorsImage);
         // Подстраховка, если список не добавлен в FXML
         if (choiceBox.getItems().isEmpty()) {
             choiceBox.getItems().addAll("Камень", "Ножницы", "Бумага");
@@ -49,6 +63,14 @@ public class MainController {
         }
 
         String turnEng = convertToEnglish(turn);
+        rockImageView.setVisible(false);
+        paperImageView.setVisible(false);
+        scissorsImageView.setVisible(false);
+        switch (turnEng){
+            case "rock": rockImageView.setVisible(true); break;
+            case "paper": paperImageView.setVisible(true); break;
+            case "scissors": scissorsImageView.setVisible(true); break;
+        }
 
         if (connectionType == null) {
             showAlert("Ошибка", "Сначала создайте или подключитесь к серверу.");
@@ -228,20 +250,5 @@ public class MainController {
         alert.setHeaderText("Результат раунда: " + result);
         alert.setContentText("Нажмите 'Ок' для продолжения");
         alert.showAndWait();
-    }
-
-    // Завершение игры корректно при закрытии
-    public void closeGame() {
-        try {
-            if (socket != null) {
-                socket.close();
-            }
-            if (serverSocket != null) {
-                serverSocket.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Platform.exit();  // Безопасное завершение работы
     }
 }

@@ -119,7 +119,7 @@
          <Image url="@paper.png" />
       </image>
       <effect>
-         <DropShadow height="23.93" radius="12.1975" width="26.86" />
+         <DropShadow height="26.13" radius="12.747499999999999" width="26.86" />
       </effect>
    </ImageView>
    <ImageView fx:id="scissorsImageView" fitHeight="126.0" fitWidth="120.0" layoutX="399.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">

@@ -3,12 +3,10 @@ package org.example.rockpaperscissors;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.*;
 import java.net.*;
-import java.util.Objects;
 
 public class MainController {
 
@@ -23,25 +21,23 @@ public class MainController {
 
     @FXML
     private Button connectBtn;
+
     @FXML
     private ImageView rockImageView, paperImageView, scissorsImageView;
-
-
 
     private String connectionType;
     private static Socket socket;
     private static ServerSocket serverSocket;
-    private Thread gameThread; // для управления потоком игры
+    private Thread gameThread;
 
+    private boolean turnSubmitted = false; // флаг, блокирующий повторный ход
 
     @FXML
     private void initialize() {
-        // Подстраховка, если список не добавлен в FXML
         if (choiceBox.getItems().isEmpty()) {
             choiceBox.getItems().addAll("Камень", "Бумага", "Ножницы");
         }
 
-        // Проверка на null для choiceBox
         if (choiceBox == null) {
             System.out.println("choiceBox не был инициализирован.");
         }
@@ -49,6 +45,11 @@ public class MainController {
 
     @FXML
     private void handlePlay() {
+        if (turnSubmitted) {
+            showAlert("Информация", "Вы уже выбрали свой ход. Дождитесь окончания раунда.");
+            return;
+        }
+
         String turn = choiceBox.getValue();
 
         if (turn == null || turn.isEmpty()) {
@@ -60,16 +61,18 @@ public class MainController {
         rockImageView.setVisible(false);
         paperImageView.setVisible(false);
         scissorsImageView.setVisible(false);
-        switch (turnEng){
-            case "rock": rockImageView.setVisible(true); break;
-            case "paper": paperImageView.setVisible(true); break;
-            case "scissors": scissorsImageView.setVisible(true); break;
+        switch (turnEng) {
+            case "rock" -> rockImageView.setVisible(true);
+            case "paper" -> paperImageView.setVisible(true);
+            case "scissors" -> scissorsImageView.setVisible(true);
         }
 
         if (connectionType == null) {
             showAlert("Ошибка", "Сначала создайте или подключитесь к серверу.");
             return;
         }
+
+        turnSubmitted = true;
 
         try {
             sendTurn(turnEng);
@@ -78,20 +81,20 @@ public class MainController {
                 Platform.runLater(() -> {
                     String result = checkResult(turnEng, enemyTurn);
                     resultLabel.setText("Ваш ход: " + turn + "\nХод противника: " + convertToRussian(enemyTurn) + "\nРезультат: " + result);
-                    showRoundEndDialog(result);  // показываем результат
+                    showRoundEndDialog(result);
+                    turnSubmitted = false; // снимаем блокировку после окончания раунда
                 });
             });
             gameThread.start();
         } catch (Exception e) {
             showAlert("Ошибка", "Ошибка соединения");
+            turnSubmitted = false; // снимаем блокировку в случае ошибки
         }
     }
 
-    // Метод для создания сервера (можно вызывать из другого окна или кнопки)
     @FXML
     public void startHosting() {
         connectionType = "server";
-
 
         TextInputDialog ipDialog = new TextInputDialog("localhost");
         ipDialog.setTitle("Создание сервера");
@@ -126,7 +129,6 @@ public class MainController {
         });
     }
 
-    // Метод для подключения к серверу
     @FXML
     public void connectToServer() {
         connectionType = "client";
@@ -214,9 +216,7 @@ public class MainController {
         };
     }
 
-
     private void showRoundEndDialog(String result) {
-        // Показать окно с результатом
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Конец раунда");
         alert.setHeaderText("Результат раунда: " + result);
@@ -226,16 +226,11 @@ public class MainController {
 
     public static void closeGame() {
         try {
-            if (socket != null) {
-                socket.close();
-            }
-            if (serverSocket != null) {
-                serverSocket.close();
-            }
+            if (socket != null) socket.close();
+            if (serverSocket != null) serverSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Platform.exit();  // Безопасное завершение работы
+        Platform.exit();
     }
-
 }

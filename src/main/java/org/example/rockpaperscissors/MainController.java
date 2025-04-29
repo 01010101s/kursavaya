@@ -58,6 +58,8 @@ public class MainController {
         }
 
         String turnEng = convertToEnglish(turn);
+
+        // Отображение изображения сразу
         rockImageView.setVisible(false);
         paperImageView.setVisible(false);
         scissorsImageView.setVisible(false);
@@ -66,6 +68,9 @@ public class MainController {
             case "paper" -> paperImageView.setVisible(true);
             case "scissors" -> scissorsImageView.setVisible(true);
         }
+
+        // Обновление текста "Ваш ход" сразу после нажатия
+        resultLabel.setText("Ваш ход: " + turn + "\nОжидаем ход противника...");
 
         if (connectionType == null) {
             showAlert("Ошибка", "Сначала создайте или подключитесь к серверу.");
@@ -82,15 +87,16 @@ public class MainController {
                     String result = checkResult(turnEng, enemyTurn);
                     resultLabel.setText("Ваш ход: " + turn + "\nХод противника: " + convertToRussian(enemyTurn) + "\nРезультат: " + result);
                     showRoundEndDialog(result);
-                    turnSubmitted = false; // снимаем блокировку после окончания раунда
+                    turnSubmitted = false;
                 });
             });
             gameThread.start();
         } catch (Exception e) {
             showAlert("Ошибка", "Ошибка соединения");
-            turnSubmitted = false; // снимаем блокировку в случае ошибки
+            turnSubmitted = false;
         }
     }
+
 
     @FXML
     public void startHosting() {

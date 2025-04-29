@@ -89,7 +89,7 @@ public class MainController {
             });
             gameThread.start();
         } catch (Exception e) {
-            showAlert("Ошибка", "Ошибка соединения: " + e.getMessage());
+            showAlert("Ошибка", "Ошибка соединения");
         }
     }
 

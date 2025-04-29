@@ -97,8 +97,7 @@ public class MainController {
     @FXML
     public void startHosting() {
         connectionType = "server";
-        hostBtn.setDisable(true);
-        connectBtn.setDisable(true);
+
 
         TextInputDialog ipDialog = new TextInputDialog("localhost");
         ipDialog.setTitle("Создание сервера");
@@ -138,8 +137,6 @@ public class MainController {
     @FXML
     public void connectToServer() {
         connectionType = "client";
-        hostBtn.setDisable(true);
-        connectBtn.setDisable(true);
 
         TextInputDialog ipDialog = new TextInputDialog("localhost");
         ipDialog.setTitle("Подключение");

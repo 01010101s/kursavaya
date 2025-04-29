@@ -63,7 +63,7 @@
       </effect>
    </Rectangle>
    <ComboBox fx:id="choiceBox" layoutX="240.0" layoutY="49.0" prefHeight="27.0" prefWidth="117.0" promptText="Выберите" style="-fx-background-color: lightgrey;" />
-   <Label fx:id="resultLabel" layoutX="238.0" layoutY="7.0" prefHeight="36.0" prefWidth="155.0" text="ВАШ ХОД:" textFill="WHITE">
+   <Label fx:id="resultLabel" alignment="CENTER" layoutX="9.0" layoutY="7.0" prefHeight="36.0" prefWidth="591.0" text="ВАШ ХОД:" textFill="WHITE">
       <font>
          <Font name="System Bold" size="25.0" />
       </font></Label>

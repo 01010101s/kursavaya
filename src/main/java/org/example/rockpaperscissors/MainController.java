@@ -32,16 +32,10 @@ public class MainController {
     private static Socket socket;
     private static ServerSocket serverSocket;
     private Thread gameThread; // для управления потоком игры
-    //private static final Image rockImage = new Image(Objects.requireNonNull(MainController.class.getResource("/org/example/rockpaperscissors/rock.png")).toString());
-    //private static final Image paperImage = new Image(Objects.requireNonNull(MainController.class.getResource("/org/example/rockpaperscissors/paper.png")).toString());
-    //private static final Image scissorsImage = new Image(Objects.requireNonNull(MainController.class.getResource("/org/example/rockpaperscissors/scissors.png")).toString());
 
 
     @FXML
     private void initialize() {
-        //rockImageView.setImage(rockImage);
-        //paperImageView.setImage(paperImage);
-        //scissorsImageView.setImage(scissorsImage);
         // Подстраховка, если список не добавлен в FXML
         if (choiceBox.getItems().isEmpty()) {
             choiceBox.getItems().addAll("Камень", "Бумага", "Ножницы");
@@ -117,7 +111,6 @@ public class MainController {
                         try {
                             serverSocket = new ServerSocket(port);
                             socket = serverSocket.accept();
-                            Platform.runLater(this::requestNicknameForHost);
                         } catch (IOException e) {
                             Platform.runLater(() -> {
                                 showAlert("Ошибка", "Не удалось создать сервер: " + e.getMessage());
@@ -155,7 +148,6 @@ public class MainController {
                     new Thread(() -> {
                         try {
                             socket = new Socket(ip, port);
-                            Platform.runLater(this::requestNicknameForClient);
                         } catch (IOException e) {
                             Platform.runLater(() -> {
                                 showAlert("Ошибка", "Не удалось подключиться: " + e.getMessage());
@@ -222,23 +214,6 @@ public class MainController {
         };
     }
 
-    // Запросить ник у хоста
-    private void requestNicknameForHost() {
-        TextInputDialog nicknameDialog = new TextInputDialog();
-        nicknameDialog.setTitle("Введите ник");
-        nicknameDialog.setHeaderText("Введите ваш ник для игры");
-        nicknameDialog.setContentText("Ник:");
-        nicknameDialog.showAndWait();
-    }
-
-    // Запросить ник у клиента
-    private void requestNicknameForClient() {
-        TextInputDialog nicknameDialog = new TextInputDialog();
-        nicknameDialog.setTitle("Введите ник");
-        nicknameDialog.setHeaderText("Введите ваш ник для игры");
-        nicknameDialog.setContentText("Ник:");
-        nicknameDialog.showAndWait();
-    }
 
     private void showRoundEndDialog(String result) {
         // Показать окно с результатом
